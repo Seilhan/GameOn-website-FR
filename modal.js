@@ -17,7 +17,6 @@ const validMsg = document.getElementById('valid');
 
 // REGEX
 const regexEmail = /^([a-z0-9_\.-]+\@[\da-z\.-]+\.[a-z\.]{2,6})$/; // email check
-const regexbirthDate = /(\d{4})-(\d{2})-(\d{2})/; // birthDate check
 const regexquantity = /[0-9]{1,9}/; // quantity chek
 
 // Error messages
@@ -33,6 +32,7 @@ const msgError = {
 
 // launch modal event
 modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
+
 
 // Open modal form
 function launchModal() {
@@ -70,11 +70,11 @@ function validate() {
 
         switch (id) {
             case 'firstName':
-                inputArray.push(setMesgError(formData.querySelector('input').value.length < 2, formData, id));
+                inputArray.push(setMesgError(formData.querySelector('input').value.trim().length < 2, formData, id));
                 break;
 
             case 'lastName':
-                inputArray.push(setMesgError(formData.querySelector('input').value.length < 2, formData, id));
+                inputArray.push(setMesgError(formData.querySelector('input').value.trim().length < 2, formData, id));
                 break;
 
             case 'email':
@@ -82,7 +82,7 @@ function validate() {
                 break;
 
             case 'birthDate':
-                inputArray.push(setMesgError(!regexbirthDate.test(formData.querySelector('input').value), formData, id));
+                inputArray.push(setMesgError(new Date(formData.querySelector('input').value) > new Date(), formData, id));
                 break;
 
             case 'quantity':
