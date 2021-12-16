@@ -36,6 +36,9 @@ modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
 
 // Open modal form
 function launchModal() {
+    form.reset();
+    form.style.display = "block";
+    valid.classList.remove("show");
     modalbg.style.display = "block";
 }
 
@@ -103,7 +106,7 @@ function validate() {
     });
 
     if (inputArray.filter(e => !e).length === 0) {
-        form.remove();
+        form.style.display = "none";
         valid.classList.add("show");
     }
 
